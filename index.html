@@ -21,6 +21,8 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/4.6.2/pixi.js"></script>   
   <body>
     
+    <div class="cactus"></div>
+    <div class="cactus"></div>
 
     <script>
       window.onload = function() {
@@ -28,7 +30,14 @@
           width: window.innerWidth,
           height: window.innerHeight
         });
-        document.body.appendChild(app.view);
+        
+        var cactuses = document.querySelectorAll('.cactus');
+
+        for (var i = 0; i < cactuses.length; i++) {
+          cactuses[i].appendChild(app.view);
+        }
+        
+//         document.body.appendChild(app.view);
 
         var count = 0;
 
