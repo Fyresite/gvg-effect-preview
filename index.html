@@ -14,67 +14,20 @@
     }
 
     body {
-      background: black;
+      background: rgb(5, 0, 51);
       text-align: center;
     }
+
+    iframe {
+      height: 100%;
+      width: 100%;
+    }
   </style>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/4.6.2/pixi.js"></script>   
+  
   <body>
     
-    <div class="cactus"></div>
-    <div class="cactus"></div>
-
-    <script>
-      window.onload = function() {
-        var app = new PIXI.Application({
-          width: window.innerWidth,
-          height: window.innerHeight
-        });
-        
-        var cactuses = document.querySelectorAll('.cactus');
-
-        for (var i = 0; i < cactuses.length; i++) {
-          cactuses[i].appendChild(app.view);
-        }
-        
-//         document.body.appendChild(app.view);
-
-        var count = 0;
-
-        let segments = 20;
-
-        // build a rope!
-        var ropeLength = 5767 / segments;
-
-        var points = [];
-
-        for (var i = 0; i < segments; i++) {
-          points.push(new PIXI.Point(0, i * ropeLength));
-        }
-
-        var strip = new PIXI.mesh.Rope(PIXI.Texture.fromImage('assets/svg/Cactus-Left.png'), points);
-
-        var snakeContainer = new PIXI.Container();
-        snakeContainer.x = app.stage.width / 2;
-        snakeContainer.y = 500;
-
-        snakeContainer.scale.set(0.07, 0.15);
-        app.stage.addChild(snakeContainer);
-
-        snakeContainer.addChild(strip);
-
-        app.ticker.add(function() {
-
-            count += 0.05;
-
-            // make the snake
-            for (var i = 0; i < points.length; i++) {
-                points[i].y = Math.sin((i * 0.5) + count) * 10;
-                points[i].x = i * ropeLength + Math.cos((i * 0.3) + count) * 5;
-            }
-        });
-
-      };
-    </script>
+    <iframe src="wavy-cactus.html" frameborder="0"></iframe>
+    <!-- <iframe src="wavy-cactus.html" frameborder="0"></iframe> -->
+    
   </body>
 </html>

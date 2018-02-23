@@ -1,0 +1,20 @@
+{"frames": {
+
+"Cactus-Left-Small.png":
+{
+	"frame": {"x":0,"y":0,"w":699,"h":2048},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":699,"h":2048},
+	"sourceSize": {"w":699,"h":2048}
+}},
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "spritesheet.png",
+	"format": "RGBA8888",
+	"size": {"w":1024,"h":2048},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:c1b4078fbd36afdf62bfc780c10d0abc:4bda1222fb34520cba5e546494e18494:729adc6043343cfda41c447ce8f464d6$"
+}
+}
