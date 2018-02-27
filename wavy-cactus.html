@@ -17,24 +17,20 @@
         text-align: center;
       }
 
-      canvas#cactus {
+      canvas {
         height: 100%;
-        width: 100%;
+        /* width: 100%; */
       }
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/4.6.2/pixi.js"></script>   
   </head>
   <body>
-
-    <canvas id="cactus"></canvas>
-
     <script>
 
       let PORTRAIT = 'PORTRAIT';
       let LANDSCAPE = 'LANDSCAPE';
 
       function WavyCactus() {
-        this.canvas = document.getElementById('cactus');
         this.loader = new PIXI.loaders.Loader();
 
         this.loader.add('cactus', 'assets/svg/spritesheet.json');
@@ -47,18 +43,20 @@
         this.baseTexture = this.texture.baseTexture;
 
         this.app = new PIXI.Application({
-          width: this.canvas.offsetWidth,
-          height: this.canvas.offsetHeight,
-          view: this.canvas,
+          width: this.baseTexture.width,
+          height: this.baseTexture.height,
           transparent: true
         });
 
         document.body.appendChild(this.app.view);
 
+        this.app.view.width = this.baseTexture.width;
+
         var count = 0;
         var segments = 20;
 
-        this.ropeLength = this.canvas.offsetHeight / segments;
+        // this.ropeLength = this.canvas.offsetHeight / segments;
+        this.ropeLength = this.baseTexture.height / segments;
         var points = [];
 
         for (var i = 0; i < segments; i++) {
@@ -68,13 +66,18 @@
         this.strip = new PIXI.mesh.Rope(this.texture, points);
 
         this.container = new PIXI.Container();
-        this.container.x = this.canvas.offsetWidth / 2;
-        this.container.y = this.canvas.offsetHeight / 2;
+        // this.container.x = this.canvas.offsetWidth / 2;
+        // this.container.y = this.canvas.offsetHeight / 2;
+        this.container.x = this.baseTexture.width / 2;
+        this.container.y = this.baseTexture.height / 2;
 
-        var scaleX = this.canvas.offsetWidth / this.baseTexture.width;
-        var scaleY = scaleX * (this.baseTexture.width / this.baseTexture.height);
+        // var scaleX = this.canvas.offsetWidth / this.baseTexture.width;
+        // var scaleX = this.baseTexture.width / this.canvas.offsetWidth;
+        // var scaleY = scaleX * (this.baseTexture.width / this.baseTexture.height);
 
-        this.container.scale.set(scaleX);
+        // console.log(scaleX);
+
+        this.container.scale.set(0.5, 1);
 
         this.app.stage.addChild(this.container);
         this.container.addChild(this.strip);
@@ -83,25 +86,26 @@
           count += 0.05;
           // make the snake
           for (var i = 0; i < points.length; i++) {
-            points[i].y = Math.sin((i * 0.5) + count);
-            points[i].x = i * this.ropeLength + Math.cos((i * 0.3) + count);
+            points[i].y = Math.sin((i * 0.5) + count) * 2;
+            points[i].x = i * this.ropeLength + Math.cos((i * 0.3) + count) * 3;
           }
         }.bind(this));
 
         this.container.x = 0;
-        this.container.y = this.canvas.offsetHeight / 2;
+        // this.container.y = this.canvas.offsetHeight / 2;
+        this.container.y = this.baseTexture.height / 2;
 
         // setTimeout(function() {
-          this.resize();
+          // this.resize();
         // }.bind(this), 500);
 
         window.onresize = function(e) {
-          this.resize();
+          // this.resize();
         }.bind(this);
       };
 
       WavyCactus.prototype.resize = function() {
-        let orientation = this.getCanvasOrientation();
+        // let orientation = this.getCanvasOrientation();
 
 
         // if LANDSCAPE we limit the cactus by it's height
@@ -118,9 +122,9 @@
         // }
       };
 
-      WavyCactus.prototype.getCanvasOrientation = function() {
-        return this.canvas.offsetWidth / this.canvas.offsetHeight > 1 ? LANDSCAPE : PORTRAIT;
-      };
+      // WavyCactus.prototype.getCanvasOrientation = function() {
+      //   return this.canvas.offsetWidth / this.canvas.offsetHeight > 1 ? LANDSCAPE : PORTRAIT;
+      // };
 
       window.onload = function() {
         window.cactus = new WavyCactus();

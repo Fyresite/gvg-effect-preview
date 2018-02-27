@@ -18,16 +18,94 @@
       text-align: center;
     }
 
-    iframe {
+    .example-frame {
+      width: 100%;
+      max-width: 800px;
+      position: relative;
+    }
+
+    .example-frame .sizer {
+      position: relative;
+      width: 100%;
+      padding-top: 100%; /* (2048 / 699) * 100 (height / width) * 100 of cactus image */
+    }
+
+    .example-frame .sizer iframe {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .example-frame .sizer .tester {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .aspect-ratio-box {
+      height: 0;
+      overflow: hidden;
+      padding-top: 100%;
+      position: relative;
+    }
+
+    .aspect-ratio-box-inside {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .aspect-ratio-box-inside .centering {
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .aspect-ratio-box-inside .centering iframe {
       height: 100%;
       width: 100%;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: row;
+    }
+
+    .container .col {
+      flex: 1;
     }
   </style>
   
   <body>
-    
-    <iframe src="wavy-cactus.html" frameborder="0"></iframe>
-    <!-- <iframe src="wavy-cactus.html" frameborder="0"></iframe> -->
-    
+
+    <div class="container">
+      <div class="col">
+        <div class="aspect-ratio-box">
+          <div class="aspect-ratio-box-inside">
+            <div class="centering">
+              <iframe src="wavy-cactus.html" frameborder="0"></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="aspect-ratio-box">
+          <div class="aspect-ratio-box-inside">
+            <div class="centering">
+              <iframe src="wavy-cactus.html" frameborder="0"></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
